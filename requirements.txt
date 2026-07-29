@@ -1,0 +1,63 @@
+# ==============================================================================
+# DEPENDENCIAS · Estudio comparativo de detección de blanqueo por clasificación
+# de nodos (PNA + XGBoost sobre IBM AMLworld)
+# ==============================================================================
+#
+# Entorno de referencia: Python 3.10
+#
+# INSTALACIÓN
+# -----------
+#   pip install -r requirements.txt
+#
+# PyTorch Geometric requiere instalarse DESPUÉS de PyTorch y desde su propio
+# índice. Si la instalación conjunta falla, ejecútese en dos pasos:
+#
+#   pip install torch==2.5.1
+#   pip install torch-geometric==2.6.1
+#
+# ------------------------------------------------------------------------------
+# PIN CRÍTICO · xgboost==2.1.4
+# ------------------------------------------------------------------------------
+# Las versiones de XGBoost >= 3.0 serializan el parámetro `base_score` como
+# lista (p. ej. '[5E-1]') en lugar de como número real. El cargador de modelos
+# de SHAP (XGBTreeModelLoader) intenta convertirlo con float() y aborta con
+# ValueError, impidiendo construir TreeExplainer.
+#
+# La corrección ya está incorporada en el repositorio de SHAP, pero únicamente
+# en versiones que exigen Python >= 3.11 (shap 0.50+) o >= 3.12 (shap 0.52+).
+# En entornos con Python 3.10 la única solución estable es fijar la última
+# versión de XGBoost anterior al cambio de serialización: la 2.1.4.
+#
+# Incidencias de referencia:
+#   https://github.com/shap/shap/issues/4202
+#   https://github.com/shap/shap/issues/4288
+#
+# Este pin NO afecta al rendimiento del modelo: los hiperparámetros, el
+# algoritmo de entrenamiento y las predicciones son equivalentes.
+# ------------------------------------------------------------------------------
+
+# --- Núcleo científico --------------------------------------------------------
+numpy==1.26.4
+pandas==2.2.3
+scipy==1.13.1
+
+# --- Aprendizaje automático ---------------------------------------------------
+scikit-learn==1.5.2
+xgboost==2.1.4          # PIN CRÍTICO: no actualizar a 3.x (rompe SHAP)
+
+# --- Redes neuronales de grafos -----------------------------------------------
+torch==2.5.1
+torch-geometric==2.6.1
+
+# --- Análisis de grafos -------------------------------------------------------
+networkx==3.3           # >= 3.1 requerido por simple_cycles(length_bound=...)
+
+# --- Interpretabilidad --------------------------------------------------------
+shap==0.46.0            # última rama estable compatible con Python 3.10
+
+# --- Visualización ------------------------------------------------------------
+matplotlib==3.9.2
+
+# --- Opcional: ejecución en cuaderno ------------------------------------------
+# jupyter==1.1.1
+ipykernel==6.29.5

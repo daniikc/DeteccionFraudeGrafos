@@ -1,0 +1,28 @@
+# --- Conjuntos de datos (no versionados por tamaño) ---------------------------
+datos/*.csv
+datos/*.zip
+!datos/patterns.txt
+
+# --- Salidas regeneradas por el cuaderno --------------------------------------
+resultados/*
+!resultados/.gitkeep
+
+# --- Entornos virtuales -------------------------------------------------------
+.venv/
+venv/
+env/
+
+# --- Python -------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# --- Jupyter ------------------------------------------------------------------
+.ipynb_checkpoints/
+
+# --- Sistema operativo y editores ---------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

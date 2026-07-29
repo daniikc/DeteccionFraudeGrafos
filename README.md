@@ -32,7 +32,6 @@ DeteccionFraudeGrafosHibrido/
 ├── datos/
 │   ├── README.md                       Cómo obtener el conjunto original
 │   └── patterns.txt                    Patrones de blanqueo de AMLworld
-└── resultados/                         Salidas generadas (vacío al clonar)
 ```
 
 Los dos archivos ejecutables quedan en la raíz y se lanzan en ese orden. Las carpetas separan
